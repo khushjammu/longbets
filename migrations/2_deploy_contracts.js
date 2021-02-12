@@ -1,5 +1,5 @@
-const LongBet = artifacts.require("LongBet");
+// const LongBet = artifacts.require("LongBet");
 
-module.exports = function (deployer) {
-  deployer.deploy(LongBet);
-};
+// module.exports = function (deployer) {
+//   deployer.deploy(LongBet);
+// };
