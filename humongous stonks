@@ -1,0 +1,26 @@
+// proccess to test this shit, all done in `truffle develop`
+
+// predictor: accounts[0]
+// challenger: accounts[1]
+// arbiter: accounts[2]
+
+
+migrate --compile-all --reset
+
+let qb = await QuestoBets.deployed()
+qb.newBet(accounts[1], accounts[2], accounts[0], accounts[1], "stonks", "stonks", {from: accounts[0], value: web3.utils.toWei("1", "ether")})
+
+debug <tx hash> // to get the address of newly created bet. not sure why this is necessary since it should be returned previously. i'll have to fix that.
+
+let bet = await LongBet.at('<address>')
+
+await bet.acceptBet({from: accounts[0]})
+await bet.acceptBet({from: accounts[1]})
+await bet.acceptBet({from: accounts[2]})
+
+// both predictor and challenger
+await bet.vote(1, {from: accounts[0]})
+await bet.vote(1, {from: accounts[1]})
+
+// try to vote from arbiter acc, should fail b/c contract is resolved
+await bet.vote(1, {from: accounts[2]})

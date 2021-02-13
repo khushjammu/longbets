@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0
-
 pragma solidity >=0.8.0 <0.9.0;
-pragma abicoder v2;
 
 /**
  * @title Long Bets, but Crypto TM
@@ -9,8 +7,6 @@ pragma abicoder v2;
  */
 
 contract LongBet {
-    // NOT INTEGRATED WITH ANYTHING, JUST PUT HERE
-
     // todo: add "earliest date this can be voted on"
     // todo: add duration (e.g. this bet is over x years)
     // todo: add way for arbiter and challenger to set their arguments
@@ -57,6 +53,7 @@ contract LongBet {
 
     // creates the LongBet
     constructor(
+    	address arg_predictor,
         address arg_challenger, 
         address arg_arbiter, 
         address pWins, 
@@ -64,7 +61,7 @@ contract LongBet {
         string memory pArg, 
         string memory t) 
         payable {
-            require(msg.sender != arg_challenger && arg_challenger != arg_arbiter && arg_arbiter != msg.sender, "predictor, challenger, arbiter must be different addresses");
+            require(arg_predictor != arg_challenger && arg_challenger != arg_arbiter && arg_arbiter != arg_predictor, "predictor, challenger, arbiter must be different addresses");
             require(
                 keccak256(bytes(pArg)) != keccak256(bytes("")) && 
                 keccak256(bytes(t)) != keccak256(bytes("")), 
@@ -73,13 +70,13 @@ contract LongBet {
                 
             // todo: add check that value is > 0
             
-            predictor = msg.sender;
+            predictor = arg_predictor;
             challenger = arg_challenger;
             arbiter = arg_arbiter;
             
             // right now, these conditions are suboptimal: it's a hacky way of approximating null
             // todo: improve this
-            predictorWins = pWins == address(0x0) ? msg.sender: pWins;
+            predictorWins = pWins == address(0x0) ? arg_predictor: pWins;
             challengerWins = cWins == address(0x0) ? arg_challenger: cWins;
             
             // todo: add assertion these aren't empty

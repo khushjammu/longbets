@@ -1,0 +1,1237 @@
+{
+  "contractName": "Stonks",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.8.1+commit.df193b15\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Users/khushjammu/GitHub/longbets/contracts/QuestoBets.sol\":\"Stonks\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/khushjammu/GitHub/longbets/contracts/LongBet.sol\":{\"keccak256\":\"0x8857d62f04ad542da08bf41ee99c969e01e1bf66dc1c26c2b3922daa0bba0326\",\"license\":\"GPL-3.0\",\"urls\":[\"bzz-raw://1fb41aaaa353deffc5c597d5db92b424374597a862992d892623e6f480648289\",\"dweb:/ipfs/QmSkbJzL43feDJGh8dmqTZ4utErPc7Wy45QCnHizxa2guN\"]},\"/Users/khushjammu/GitHub/longbets/contracts/QuestoBets.sol\":{\"keccak256\":\"0x59deadff5f3dedcc167e5448d02dbceebbeafcb669a3958ce643148084abcede\",\"license\":\"GPL-3.0\",\"urls\":[\"bzz-raw://5ae74943b87bc1db9e9022d881bbf5755cf82767b842a7f0c574085561d9a727\",\"dweb:/ipfs/QmZRbqW5QXPCcAZGp1J11PGja9y8kFyK4mjaFTPAXQNBEQ\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea26469706673582212200ba9198fc5a74344d629ce5aab29358224d4f509268bc482a9a647bf8a74dcf964736f6c63430008010033",
+  "deployedBytecode": "0x6080604052600080fdfea26469706673582212200ba9198fc5a74344d629ce5aab29358224d4f509268bc482a9a647bf8a74dcf964736f6c63430008010033",
+  "immutableReferences": {},
+  "generatedSources": [],
+  "deployedGeneratedSources": [],
+  "sourceMap": "183:31:3:-:0;;;;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "183:31:3:-:0;;;;;",
+  "source": "// SPDX-License-Identifier: GPL-3.0\npragma solidity >=0.8.0 <0.9.0;\n\n/**\n * @title Long Bets, but Crypto TM\n * @dev Store & retrieve value in a variable\n */\n\nimport \"./LongBet.sol\";\n\ncontract Stonks {\n    uint a;\n}\n\ncontract QuestoBets {\n    // Stonks[] bets;\n    LongBet[] bets;\n\n    function newBet(\n        address arg_challenger, \n        address arg_arbiter, \n        address pWins, \n        address cWins, \n        string memory pArg, \n        string memory t)\n    payable \n    public returns (uint){\n        // address s = new Stonks();\n        // bets.push(new Stonks());\n        bets.push(new LongBet(arg_challenger, arg_arbiter, pWins, cWins, pArg, t));\n        return bets.length;\n    }\n}\n\n",
+  "sourcePath": "/Users/khushjammu/GitHub/longbets/contracts/QuestoBets.sol",
+  "ast": {
+    "absolutePath": "/Users/khushjammu/GitHub/longbets/contracts/QuestoBets.sol",
+    "exportedSymbols": {
+      "LongBet": [
+        388
+      ],
+      "QuestoBets": [
+        472
+      ],
+      "Stonks": [
+        431
+      ]
+    },
+    "id": 473,
+    "license": "GPL-3.0",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 427,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.8",
+          ".0",
+          "<",
+          "0.9",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "36:31:3"
+      },
+      {
+        "absolutePath": "/Users/khushjammu/GitHub/longbets/contracts/LongBet.sol",
+        "file": "./LongBet.sol",
+        "id": 428,
+        "nodeType": "ImportDirective",
+        "scope": 473,
+        "sourceUnit": 389,
+        "src": "158:23:3",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 431,
+        "linearizedBaseContracts": [
+          431
+        ],
+        "name": "Stonks",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 430,
+            "mutability": "mutable",
+            "name": "a",
+            "nodeType": "VariableDeclaration",
+            "scope": 431,
+            "src": "205:6:3",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 429,
+              "name": "uint",
+              "nodeType": "ElementaryTypeName",
+              "src": "205:4:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "visibility": "internal"
+          }
+        ],
+        "scope": 473,
+        "src": "183:31:3"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [
+          388
+        ],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 472,
+        "linearizedBaseContracts": [
+          472
+        ],
+        "name": "QuestoBets",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 435,
+            "mutability": "mutable",
+            "name": "bets",
+            "nodeType": "VariableDeclaration",
+            "scope": 472,
+            "src": "264:14:3",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_array$_t_contract$_LongBet_$388_$dyn_storage",
+              "typeString": "contract LongBet[]"
+            },
+            "typeName": {
+              "baseType": {
+                "id": 433,
+                "nodeType": "UserDefinedTypeName",
+                "pathNode": {
+                  "id": 432,
+                  "name": "LongBet",
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 388,
+                  "src": "264:7:3"
+                },
+                "referencedDeclaration": 388,
+                "src": "264:7:3",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_contract$_LongBet_$388",
+                  "typeString": "contract LongBet"
+                }
+              },
+              "id": 434,
+              "nodeType": "ArrayTypeName",
+              "src": "264:9:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_array$_t_contract$_LongBet_$388_$dyn_storage_ptr",
+                "typeString": "contract LongBet[]"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 470,
+              "nodeType": "Block",
+              "src": "505:192:3",
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "arguments": [
+                          {
+                            "id": 458,
+                            "name": "arg_challenger",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 437,
+                            "src": "610:14:3",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          {
+                            "id": 459,
+                            "name": "arg_arbiter",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 439,
+                            "src": "626:11:3",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          {
+                            "id": 460,
+                            "name": "pWins",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 441,
+                            "src": "639:5:3",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          {
+                            "id": 461,
+                            "name": "cWins",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 443,
+                            "src": "646:5:3",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          {
+                            "id": 462,
+                            "name": "pArg",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 445,
+                            "src": "653:4:3",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            }
+                          },
+                          {
+                            "id": 463,
+                            "name": "t",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 447,
+                            "src": "659:1:3",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            },
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            },
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            },
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            },
+                            {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            },
+                            {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            }
+                          ],
+                          "id": 457,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "nodeType": "NewExpression",
+                          "src": "598:11:3",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_creation_payable$_t_address_$_t_address_$_t_address_$_t_address_$_t_string_memory_ptr_$_t_string_memory_ptr_$returns$_t_contract$_LongBet_$388_$",
+                            "typeString": "function (address,address,address,address,string memory,string memory) payable returns (contract LongBet)"
+                          },
+                          "typeName": {
+                            "id": 456,
+                            "nodeType": "UserDefinedTypeName",
+                            "pathNode": {
+                              "id": 455,
+                              "name": "LongBet",
+                              "nodeType": "IdentifierPath",
+                              "referencedDeclaration": 388,
+                              "src": "602:7:3"
+                            },
+                            "referencedDeclaration": 388,
+                            "src": "602:7:3",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_LongBet_$388",
+                              "typeString": "contract LongBet"
+                            }
+                          }
+                        },
+                        "id": 464,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "598:63:3",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_LongBet_$388",
+                          "typeString": "contract LongBet"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_contract$_LongBet_$388",
+                          "typeString": "contract LongBet"
+                        }
+                      ],
+                      "expression": {
+                        "id": 452,
+                        "name": "bets",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 435,
+                        "src": "588:4:3",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_contract$_LongBet_$388_$dyn_storage",
+                          "typeString": "contract LongBet[] storage ref"
+                        }
+                      },
+                      "id": 454,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "push",
+                      "nodeType": "MemberAccess",
+                      "src": "588:9:3",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_arraypush_nonpayable$_t_contract$_LongBet_$388_$returns$__$",
+                        "typeString": "function (contract LongBet)"
+                      }
+                    },
+                    "id": 465,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "588:74:3",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 466,
+                  "nodeType": "ExpressionStatement",
+                  "src": "588:74:3"
+                },
+                {
+                  "expression": {
+                    "expression": {
+                      "id": 467,
+                      "name": "bets",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 435,
+                      "src": "679:4:3",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_array$_t_contract$_LongBet_$388_$dyn_storage",
+                        "typeString": "contract LongBet[] storage ref"
+                      }
+                    },
+                    "id": 468,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "length",
+                    "nodeType": "MemberAccess",
+                    "src": "679:11:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 451,
+                  "id": 469,
+                  "nodeType": "Return",
+                  "src": "672:18:3"
+                }
+              ]
+            },
+            "functionSelector": "68ef58bc",
+            "id": 471,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "newBet",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 448,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 437,
+                  "mutability": "mutable",
+                  "name": "arg_challenger",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 471,
+                  "src": "310:22:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 436,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "310:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 439,
+                  "mutability": "mutable",
+                  "name": "arg_arbiter",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 471,
+                  "src": "343:19:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 438,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "343:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 441,
+                  "mutability": "mutable",
+                  "name": "pWins",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 471,
+                  "src": "373:13:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 440,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "373:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 443,
+                  "mutability": "mutable",
+                  "name": "cWins",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 471,
+                  "src": "397:13:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 442,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "397:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 445,
+                  "mutability": "mutable",
+                  "name": "pArg",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 471,
+                  "src": "421:18:3",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 444,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "421:6:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 447,
+                  "mutability": "mutable",
+                  "name": "t",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 471,
+                  "src": "450:15:3",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 446,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "450:6:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "300:166:3"
+            },
+            "returnParameters": {
+              "id": 451,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 450,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 471,
+                  "src": "500:4:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 449,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "500:4:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "499:6:3"
+            },
+            "scope": 472,
+            "src": "285:412:3",
+            "stateMutability": "payable",
+            "virtual": false,
+            "visibility": "public"
+          }
+        ],
+        "scope": 473,
+        "src": "216:483:3"
+      }
+    ],
+    "src": "36:665:3"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/khushjammu/GitHub/longbets/contracts/QuestoBets.sol",
+    "exportedSymbols": {
+      "LongBet": [
+        388
+      ],
+      "QuestoBets": [
+        472
+      ],
+      "Stonks": [
+        431
+      ]
+    },
+    "id": 473,
+    "license": "GPL-3.0",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 427,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.8",
+          ".0",
+          "<",
+          "0.9",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "36:31:3"
+      },
+      {
+        "absolutePath": "/Users/khushjammu/GitHub/longbets/contracts/LongBet.sol",
+        "file": "./LongBet.sol",
+        "id": 428,
+        "nodeType": "ImportDirective",
+        "scope": 473,
+        "sourceUnit": 389,
+        "src": "158:23:3",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 431,
+        "linearizedBaseContracts": [
+          431
+        ],
+        "name": "Stonks",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 430,
+            "mutability": "mutable",
+            "name": "a",
+            "nodeType": "VariableDeclaration",
+            "scope": 431,
+            "src": "205:6:3",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 429,
+              "name": "uint",
+              "nodeType": "ElementaryTypeName",
+              "src": "205:4:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "visibility": "internal"
+          }
+        ],
+        "scope": 473,
+        "src": "183:31:3"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [
+          388
+        ],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 472,
+        "linearizedBaseContracts": [
+          472
+        ],
+        "name": "QuestoBets",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 435,
+            "mutability": "mutable",
+            "name": "bets",
+            "nodeType": "VariableDeclaration",
+            "scope": 472,
+            "src": "264:14:3",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_array$_t_contract$_LongBet_$388_$dyn_storage",
+              "typeString": "contract LongBet[]"
+            },
+            "typeName": {
+              "baseType": {
+                "id": 433,
+                "nodeType": "UserDefinedTypeName",
+                "pathNode": {
+                  "id": 432,
+                  "name": "LongBet",
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 388,
+                  "src": "264:7:3"
+                },
+                "referencedDeclaration": 388,
+                "src": "264:7:3",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_contract$_LongBet_$388",
+                  "typeString": "contract LongBet"
+                }
+              },
+              "id": 434,
+              "nodeType": "ArrayTypeName",
+              "src": "264:9:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_array$_t_contract$_LongBet_$388_$dyn_storage_ptr",
+                "typeString": "contract LongBet[]"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 470,
+              "nodeType": "Block",
+              "src": "505:192:3",
+              "statements": [
+                {
+                  "expression": {
+                    "arguments": [
+                      {
+                        "arguments": [
+                          {
+                            "id": 458,
+                            "name": "arg_challenger",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 437,
+                            "src": "610:14:3",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          {
+                            "id": 459,
+                            "name": "arg_arbiter",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 439,
+                            "src": "626:11:3",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          {
+                            "id": 460,
+                            "name": "pWins",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 441,
+                            "src": "639:5:3",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          {
+                            "id": 461,
+                            "name": "cWins",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 443,
+                            "src": "646:5:3",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          {
+                            "id": 462,
+                            "name": "pArg",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 445,
+                            "src": "653:4:3",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            }
+                          },
+                          {
+                            "id": 463,
+                            "name": "t",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 447,
+                            "src": "659:1:3",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            },
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            },
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            },
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            },
+                            {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            },
+                            {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            }
+                          ],
+                          "id": 457,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "nodeType": "NewExpression",
+                          "src": "598:11:3",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_creation_payable$_t_address_$_t_address_$_t_address_$_t_address_$_t_string_memory_ptr_$_t_string_memory_ptr_$returns$_t_contract$_LongBet_$388_$",
+                            "typeString": "function (address,address,address,address,string memory,string memory) payable returns (contract LongBet)"
+                          },
+                          "typeName": {
+                            "id": 456,
+                            "nodeType": "UserDefinedTypeName",
+                            "pathNode": {
+                              "id": 455,
+                              "name": "LongBet",
+                              "nodeType": "IdentifierPath",
+                              "referencedDeclaration": 388,
+                              "src": "602:7:3"
+                            },
+                            "referencedDeclaration": 388,
+                            "src": "602:7:3",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_LongBet_$388",
+                              "typeString": "contract LongBet"
+                            }
+                          }
+                        },
+                        "id": 464,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "598:63:3",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_LongBet_$388",
+                          "typeString": "contract LongBet"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_contract$_LongBet_$388",
+                          "typeString": "contract LongBet"
+                        }
+                      ],
+                      "expression": {
+                        "id": 452,
+                        "name": "bets",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 435,
+                        "src": "588:4:3",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_contract$_LongBet_$388_$dyn_storage",
+                          "typeString": "contract LongBet[] storage ref"
+                        }
+                      },
+                      "id": 454,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "push",
+                      "nodeType": "MemberAccess",
+                      "src": "588:9:3",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_arraypush_nonpayable$_t_contract$_LongBet_$388_$returns$__$",
+                        "typeString": "function (contract LongBet)"
+                      }
+                    },
+                    "id": 465,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "588:74:3",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 466,
+                  "nodeType": "ExpressionStatement",
+                  "src": "588:74:3"
+                },
+                {
+                  "expression": {
+                    "expression": {
+                      "id": 467,
+                      "name": "bets",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 435,
+                      "src": "679:4:3",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_array$_t_contract$_LongBet_$388_$dyn_storage",
+                        "typeString": "contract LongBet[] storage ref"
+                      }
+                    },
+                    "id": 468,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "length",
+                    "nodeType": "MemberAccess",
+                    "src": "679:11:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 451,
+                  "id": 469,
+                  "nodeType": "Return",
+                  "src": "672:18:3"
+                }
+              ]
+            },
+            "functionSelector": "68ef58bc",
+            "id": 471,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "newBet",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 448,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 437,
+                  "mutability": "mutable",
+                  "name": "arg_challenger",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 471,
+                  "src": "310:22:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 436,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "310:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 439,
+                  "mutability": "mutable",
+                  "name": "arg_arbiter",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 471,
+                  "src": "343:19:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 438,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "343:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 441,
+                  "mutability": "mutable",
+                  "name": "pWins",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 471,
+                  "src": "373:13:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 440,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "373:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 443,
+                  "mutability": "mutable",
+                  "name": "cWins",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 471,
+                  "src": "397:13:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 442,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "397:7:3",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 445,
+                  "mutability": "mutable",
+                  "name": "pArg",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 471,
+                  "src": "421:18:3",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 444,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "421:6:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 447,
+                  "mutability": "mutable",
+                  "name": "t",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 471,
+                  "src": "450:15:3",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 446,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "450:6:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "300:166:3"
+            },
+            "returnParameters": {
+              "id": 451,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 450,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 471,
+                  "src": "500:4:3",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 449,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "500:4:3",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "499:6:3"
+            },
+            "scope": 472,
+            "src": "285:412:3",
+            "stateMutability": "payable",
+            "virtual": false,
+            "visibility": "public"
+          }
+        ],
+        "scope": 473,
+        "src": "216:483:3"
+      }
+    ],
+    "src": "36:665:3"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.8.1+commit.df193b15.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.3.4",
+  "updatedAt": "2021-02-13T16:50:19.770Z",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  }
+}
