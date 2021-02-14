@@ -9,9 +9,10 @@ pragma solidity >=0.8.0 <0.9.0;
 import "./LongBet.sol";
 
 contract QuestoBets {
-    LongBet[] bets;
+    LongBet[] public bets;
 
     function newBet(
+        string prediction,
         address arg_challenger, 
         address arg_arbiter, 
         address pWins, 
@@ -20,6 +21,7 @@ contract QuestoBets {
         string memory t)
     payable 
     public returns (address){
+        require (keccak256(bytes(prediction)) != keccak256(bytes("")), "must provide prediction!");
         require(msg.value > 0, "must deposit stake");
         require(msg.sender != arg_challenger && arg_challenger != arg_arbiter && arg_arbiter != msg.sender, "predictor, challenger, arbiter must be different addresses");
         require(
@@ -28,9 +30,23 @@ contract QuestoBets {
             "predictor's argument and terms shouldn't be empty"
             );
 
-        bets.push(new LongBet{value:msg.value}(msg.sender, arg_challenger, arg_arbiter, pWins, cWins, pArg, t));
+        bets.push(new LongBet{value:msg.value}(prediction, msg.sender, arg_challenger, arg_arbiter, pWins, cWins, pArg, t));
         // payable(address(bets[bets.length-1])).transfer(msg.value);
         return address(bets[bets.length-1]);
+    }
+
+    function getLatestBet()
+    public
+    view
+    returns (address) {
+        return address(bets[bets.length-1]);
+    }
+
+    function getBets()
+    public
+    view
+    returns (LongBet[] memory) {
+        return bets;
     }
 }
 

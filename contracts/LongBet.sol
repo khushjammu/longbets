@@ -17,26 +17,26 @@ contract LongBet {
     
     bool _isActive = true;
     
-    address predictor;
-    address challenger;
-    address arbiter; // person who casts the tie-breaker vote in whether a bet was resolved or not
+    address public predictor;
+    address public challenger;
+    address public arbiter; // person who casts the tie-breaker vote in whether a bet was resolved or not
     
-    uint256 stakes;
-    address predictorWins; // money sent here when predictor wins
-    address challengerWins; // money sent here when challenger wins
+    uint256 public stakes;
+    address public predictorWins; // money sent here when predictor wins
+    address public challengerWins; // money sent here when challenger wins
+
+    string public prediction; // the actual prediction
     
-    string predictorArg;
-    string challengerArg;
-    string arbiterArg;
+    string public predictorArg;
+    string public challengerArg;
+    string public arbiterArg;
     
-    string detailedTerms;
+    string public detailedTerms;
     
     enum VoteState { NotVoted, VotedYes, VotedNo }
     
     mapping (address => VoteState) votes; // stores the votes by individuals
     mapping (address => bool) accepted; // stores individuals accepting
-    
-
 
     
     // https://ethereum.stackexchange.com/questions/82203/how-to-disable-a-contract-by-changing-some-internal-state-which-causes-all-funct
@@ -53,6 +53,7 @@ contract LongBet {
 
     // creates the LongBet
     constructor(
+    	string memory arg_prediction,
     	address arg_predictor,
         address arg_challenger, 
         address arg_arbiter, 
@@ -61,6 +62,8 @@ contract LongBet {
         string memory pArg, 
         string memory t) 
         payable {
+        	require (keccak256(bytes(arg_prediction)) != keccak256(bytes("")), "must provide prediction!")
+
             require(arg_predictor != arg_challenger && arg_challenger != arg_arbiter && arg_arbiter != arg_predictor, "predictor, challenger, arbiter must be different addresses");
             require(
                 keccak256(bytes(pArg)) != keccak256(bytes("")) && 
@@ -69,6 +72,8 @@ contract LongBet {
                 );
                 
             // todo: add check that value is > 0
+
+            prediction = arg_prediction;
             
             predictor = arg_predictor;
             challenger = arg_challenger;
