@@ -1,4 +1,22 @@
 import React from "react";
+import Modal from "react-modal";
+
+const customStyles = {
+	content: {
+		top: "50%",
+		left: "50%",
+		right: "auto",
+		bottom: "auto",
+		marginRight: "-50%",
+		transform: "translate(-50%, -50%)",
+		backgroundColor: "black",
+		borderRadius: "",
+	},
+	overlay: {
+		backgroundColor: "#11111",
+		backdropFilter: "blur(6px)",
+	},
+};
 
 const ContractCreator = ({ web3, contract }) => {
 	const [arbiter, setArbiter] = React.useState("");
@@ -8,6 +26,16 @@ const ContractCreator = ({ web3, contract }) => {
 	const [challengerValid, setChallengerValid] = React.useState("Short");
 	const [stake, setStake] = React.useState(0);
 	const [accounts, setAccounts] = React.useState(null);
+	const [showModal, setShowModal] = React.useState(true);
+	const [editingWho, setEditingWho] = React.useState(null);
+
+	React.useEffect(() => {
+		if (showModal) {
+			document.body.style.overflow = "hidden";
+		} else {
+			document.body.style.overflow = "unset";
+		}
+	}, [showModal]);
 
 	web3.eth.getAccounts((error, result) => {
 		if (error) {
@@ -16,6 +44,10 @@ const ContractCreator = ({ web3, contract }) => {
 			setAccounts(result);
 		}
 	});
+
+	const editAddressModal = (field) => {
+		setShowModal(true);
+	};
 
 	const arbiterValidUpdate = React.useCallback(
 		(e) => {
@@ -65,6 +97,28 @@ const ContractCreator = ({ web3, contract }) => {
 
 	return (
 		<div class="w-3/5 h-auto p-10 justify-center border-1 border-gray-700 rounded-lg">
+			<Modal
+				isOpen={showModal}
+				onRequestClose={() => setShowModal(false)}
+				// style={customStyles}
+				class="top-1/2 left-1/2"
+			>
+				<button onClick={() => setShowModal(false)}>close</button>
+				<div class="rounded-md w-full mt-1">
+					<div class="text-sm font-medium text-white">
+						<label>Arbiter address</label>
+					</div>
+					<input
+						type="text"
+						class="transition duration-100 ease-in-out hover:focus:border-blue-700 hover:border-white focus:border-blue-700 w-4/5 sm:text-sm text-white border-gray-700 border-1 bg-black rounded-md"
+						placeholder="0xc0000..."
+						maxLength={42}
+						onChange={
+							editingWho == "arbiter" ? setArbiter : setChallenger
+						}
+					/>
+				</div>
+			</Modal>
 			<div class="flex-auto flex-wrap space-y-4 w-full">
 				<div>
 					<div class="flex justify-between text-sm font-medium text-white">
@@ -120,32 +174,20 @@ const ContractCreator = ({ web3, contract }) => {
 				</div>
 				<div class="flex justify-center">
 					<div class="w-1/2">
-						<div class="text-sm font-medium text-white">
-							<label>Arbiter address</label>
-						</div>
-						<div class="rounded-md w-full mt-1">
-							<input
-								type="text"
-								name="arbiterAddress"
-								id="arbiterAddress"
-								class="transition duration-100 ease-in-out hover:focus:border-blue-700 hover:border-white focus:border-blue-700 w-4/5 sm:text-sm text-white border-gray-700 border-1 bg-black rounded-md"
-								placeholder="0xc0000..."
-								maxLength={42}
-								onChange={arbiterValidUpdate}
-							/>
-							{/*<label
-								class={
-									"w-1/5 sm:text-sm border-gray-700 border-1 bg-black ml-1 py-2.5 px-4 rounded-md " +
-									(arbiterValid === "Valid"
-										? "bg-green-500 text-white"
-										: "bg-red-500 text-white")
-								}
-							>
-								{arbiterValid}
-							</label>*/}
-						</div>
+						<button
+							class="bg-blue-700 hover:bg-gray-800 text-white font-semibold py-2 px-4 border border-gray-700 rounded shadow justify-center"
+							onClick={() => editAddressModal(arbiter)}
+						>
+							Set Arbiter
+						</button>
 					</div>
 					<div class="w-1/2">
+						<button
+							class="bg-blue-700 hover:bg-gray-800 text-white font-semibold py-2 px-4 border border-gray-700 rounded shadow justify-center"
+							onClick={() => editAddressModal(arbiter)}
+						>
+							Set Arbiter
+						</button>
 						<div class="text-sm font-medium text-white">
 							<label>Challenger address</label>
 						</div>

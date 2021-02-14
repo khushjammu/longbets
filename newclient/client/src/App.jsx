@@ -11,7 +11,9 @@ import {
 import LongBet from "./contracts/LongBet.json";
 import QuestoBets from "./contracts/QuestoBets.json";
 import getWeb3 from "./getWeb3";
+import MainPage from "./components/mainPage";
 import ContractCreator from "./components/contractCreator";
+import PredictionViewer from "./components/predictionViewer";
 import "./css/main.css";
 
 const App = () => {
@@ -58,7 +60,7 @@ const App = () => {
   }
   return (
     <Router>
-      <div class="bg-black font-mono">
+      <div class="font-mono">
         <nav>
           <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
@@ -72,12 +74,12 @@ const App = () => {
                 </div>
                 <div class="hidden md:block">
                   <div class="ml-10 flex items-baseline space-x-4">
-                    <div class="text-gray-300 hover:text-blue-700 px-3 py-2 text-sm font-medium">
+                    <div class="text-gray-300 hover:text-blue-700 px-3 text-sm font-medium">
                       <NavLink to="/predict" activeClassName="text-blue-700">
                         Predict
                       </NavLink>
                     </div>
-                    <div class="text-gray-300 hover:text-blue-700 px-3 py-2 text-sm font-medium">
+                    <div class="text-gray-300 hover:text-blue-700 px-3 text-sm font-medium">
                       <NavLink
                         to="/viewPrediction"
                         activeClassName="text-blue-700"
@@ -92,10 +94,10 @@ const App = () => {
           </div>
         </nav>
         <Switch>
-          <Route path="/">
+          <Route exact path="/">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
               <div class="flex flex-wrap justify-center bg-black h-screen">
-                <ContractCreator web3={web3} contract={questoBets} />
+                <MainPage />
               </div>
             </div>
           </Route>
@@ -109,7 +111,7 @@ const App = () => {
           <Route path="/viewPrediction">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
               <div class="flex flex-wrap justify-center bg-black h-screen">
-                <ContractCreator web3={web3} contract={questoBets} />
+                <PredictionViewer web3={web3} questoBets={questoBets} />
               </div>
             </div>
           </Route>
