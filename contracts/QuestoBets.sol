@@ -11,6 +11,15 @@ import "./LongBet.sol";
 contract QuestoBets {
     LongBet[] public bets;
 
+    event NewBet(
+        address indexed predictor,
+        address indexed challenger,
+        address indexed arbiter,
+        address createdBet
+        );
+
+    // this emits an event which web3 can listen for
+    // (https://ethereum.stackexchange.com/questions/35679/how-to-return-address-from-newly-created-contract)
     function newBet(
         string calldata prediction,
         address arg_challenger, 
@@ -20,7 +29,7 @@ contract QuestoBets {
         string calldata pArg, 
         string calldata t)
     payable 
-    public returns (address){
+    public {
         require (keccak256(bytes(prediction)) != keccak256(bytes("")), "must provide prediction!");
         require(msg.value > 0, "must deposit stake");
         require(msg.sender != arg_challenger && arg_challenger != arg_arbiter && arg_arbiter != msg.sender, "predictor, challenger, arbiter must be different addresses");
@@ -32,7 +41,7 @@ contract QuestoBets {
 
         bets.push(new LongBet{value:msg.value}(prediction, msg.sender, arg_challenger, arg_arbiter, pWins, cWins, pArg, t));
         // payable(address(bets[bets.length-1])).transfer(msg.value);
-        return address(bets[bets.length-1]);
+        emit NewBet(msg.sender, arg_challenger, arg_arbiter, address(bets[bets.length-1]));
     }
 
     function getLatestBet()

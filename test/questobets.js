@@ -1,35 +1,94 @@
+const truffleAssert = require('truffle-assertions');
+
 const QuestoBets = artifacts.require("./QuestoBets.sol");
 const LongBet = artifacts.require("./LongBet.sol")
 
-
 contract("QuestoBets", accounts => {
-  it("...should store the value 89.", async () => {
-  	const qb = await QuestoBets.deployed();
+  var qb;
 
-  	qb.newBet("i predict the world will end", accounts[1], accounts[2], accounts[0], accounts[1], "stonks", "stonks", {from: accounts[0], value: web3.utils.toWei("1", "ether")})
+  // necessary to reset contract between each test
+  beforeEach(() => {
+     return QuestoBets.new()
+     .then((instance) => {
+        qb = instance;
+     });
+  });
+
+  it("...should work fine from start to finish.", async () => {
+  	// const qb = await QuestoBets.deployed();
+
+    const balance1 = await web3.eth.getBalance(accounts[0])
+  	await qb.newBet("i predict the world will end", accounts[1], accounts[2], accounts[0], accounts[1], "stonks", "stonks", {from: accounts[0], value: web3.utils.toWei("1", "ether")})
+    const balance2 = await web3.eth.getBalance(accounts[1])
 
   	let betAddress = await qb.bets(0);
   	let bet = await LongBet.at(betAddress);
 
   	await bet.acceptBet({from: accounts[0]})
-  	await bet.acceptBet({from: accounts[1]})
+  	await bet.acceptBet({from: accounts[1], value: web3.utils.toWei("1", "ether")}) // challenger has to deposit stake
   	await bet.acceptBet({from: accounts[2]})
 
   	// both predictor and challenger
   	await bet.vote(1, {from: accounts[0]})
   	await bet.vote(1, {from: accounts[1]})
+  });
 
-  	// try to vote from arbiter acc, should fail b/c contract is resolved
-  	// await bet.vote(1, {from: accounts[2]})
+  it("...should work if challenger offers an equal stake", async () => {
+    // const qb = await QuestoBets.deployed();
+    await qb.newBet("i predict the world will end", accounts[1], accounts[2], accounts[0], accounts[1], "stonks", "stonks", {from: accounts[0], value: web3.utils.toWei("1", "ether")})
 
-    // const simpleStorageInstance = await SimpleStorage.deployed();
+    let betAddress = await qb.bets(0);
+    let bet = await LongBet.at(betAddress);
 
-    // // Set value of 89
-    // await simpleStorageInstance.set(89, { from: accounts[0] });
+    // this should work fine
+    await bet.acceptBet({from: accounts[0]})
+    await bet.acceptBet({from: accounts[1], value: web3.utils.toWei("1", "ether")}) // challenger has to deposit stake
 
-    // // Get stored value
-    // const storedData = await simpleStorageInstance.get.call();
+  });
 
-    // assert.equal(storedData, 89, "The value 89 was not stored.");
+  it("...should throw if challenger doesn't offer an equal stake", async () => {
+    // const qb = await QuestoBets.deployed();
+    await qb.newBet("i predict the world will end", accounts[1], accounts[2], accounts[0], accounts[1], "stonks", "stonks", {from: accounts[0], value: web3.utils.toWei("1", "ether")})
+
+    let betAddress = await qb.bets(0);
+    let bet = await LongBet.at(betAddress);
+
+    await bet.acceptBet({from: accounts[0]})
+
+    await truffleAssert.reverts(bet.acceptBet({from: accounts[1]}));
+  });
+
+  it("...should be able to edit arguments", async () => {
+    const originalArguments = {
+      predictor: "previous",
+      challenger: "previous",
+      arbiter: "previous",
+      terms: "previous"
+    }
+    // const qb = await QuestoBets.deployed();
+    await qb.newBet(
+      "i predict the world will end", 
+      accounts[1], 
+      accounts[2], 
+      accounts[0], 
+      accounts[1], 
+      originalArguments["predictor"], 
+      originalArguments["terms"], 
+      {from: accounts[0], value: web3.utils.toWei("1", "ether")}
+    )
+
+    let betAddress = await qb.bets(0);
+    let bet = await LongBet.at(betAddress);
+
+    await bet.editArgument("after", {from: accounts[0]})
+    await bet.editArgument("after", {from: accounts[1]})
+    await bet.editArgument("after", {from: accounts[2]})
+
+    assert(await bet.predictorArg() === "after")
+    assert(await bet.challengerArg() === "after")
+    assert(await bet.arbiterArg() === "after")
+
+    await bet.editTerms("after", {from: accounts[2]})
+    assert(await bet.detailedTerms() === "after")
   });
 });
