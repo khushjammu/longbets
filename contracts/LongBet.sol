@@ -10,9 +10,7 @@ contract LongBet {
     // todo: add "earliest date this can be voted on"
     // todo: add duration (e.g. this bet is over x years)
     // todo: add way for arbiter and challenger to set their arguments
-    // todo: make both parties contribute to the prize pool (right now, only predictor stakes)
     // todo: both parties need to agree on arbiter
-    // todo: change rewardees
     
     bool _isActive = true;
     
@@ -20,7 +18,7 @@ contract LongBet {
     address public challenger;
     address public arbiter; // person who casts the tie-breaker vote in whether a bet was resolved or not
     
-    uint256 public stakes; // todo: delete this
+    uint256 public stakes; // used to determine how much the challenger needs to determine (it's half of the total pot)
     address public predictorWins; // money sent here when predictor wins
     address public challengerWins; // money sent here when challenger wins
 
@@ -81,27 +79,33 @@ contract LongBet {
                 "predictor's argument and terms shouldn't be empty"
                 );
                 
-
+            stakes = msg.value;
             prediction = arg_prediction;
             
             predictor = arg_predictor;
             challenger = arg_challenger;
             arbiter = arg_arbiter;
+
+            // initially, had a hack here to ensure that the arguments were passed and to have a default value if they weren't
+            // there's no need to do that because they MUST pass all parameters to call function
+            // if they give a shitty address, that's on them 
+            predictorWins = pWins;
+            challengerWins = cWins;
             
-            // right now, these conditions are suboptimal: it's a hacky way of approximating null
-            // todo: improve this
-            predictorWins = pWins == address(0x0) ? arg_predictor: pWins;
-            challengerWins = cWins == address(0x0) ? arg_challenger: cWins;
-            
-            // todo: add assertion these aren't empty
+            // require ensures these are not empty
             predictorArg = pArg;
             detailedTerms = t;
     }
     
     function acceptBet() 
     public 
+    payable
     checkActive
     isParty {
+        // if challenger, must deposit equal stake
+        if (msg.sender == challenger) {
+            require(msg.value == stakes, "must deposit an equal stake to the predictor!");
+        }
         accepted[msg.sender] = true;
     }
     
@@ -114,7 +118,6 @@ contract LongBet {
         
         votes[msg.sender] = myVote;
         shouldComplete();
-        // todo: disallow anyone but the predictor/challenger/arbiter from accepting/voting
     }
     
     // contract doesn't need to be active for this to work
@@ -126,8 +129,6 @@ contract LongBet {
         return votes[voter];
     }
     
-    // todo: should this only run if a party to the bet runs it? by right, they shouldn't even be calling this
-    // i've put in the modifier. let's see how it works
     function shouldComplete() 
     public 
     checkActive 
@@ -161,11 +162,33 @@ contract LongBet {
         // todo: should i stop using transfer? see: https://consensys.net/diligence/blog/2019/09/stop-using-soliditys-transfer-now/
         payable(rewardee).transfer(address(this).balance);
     }
+
+    function editArgument(string calldata newText)
+    public
+    checkActive
+    isParty {
+        if (msg.sender == challenger) {
+            challengerArg = newText;
+        } else if (msg.sender == predictor) {
+            predictorArg = newText;
+        } else if (msg.sender == arbiter) { 
+            arbiterArg = newText;
+        }
+    }
+
+    function editTerms(string calldata newText)
+    public
+    checkActive
+    isParty {
+        require(msg.sender == arbiter, "only arbiter can change detailed terms");
+        detailedTerms = newText;
+    }
     
     /* 
     TODO: create this funcs
     */
     
-    // edit a bet?
+    // edit fields?
+    // edit payees
 }
 
