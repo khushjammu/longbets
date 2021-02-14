@@ -10,7 +10,6 @@ contract LongBet {
     // todo: add "earliest date this can be voted on"
     // todo: add duration (e.g. this bet is over x years)
     // todo: add way for arbiter and challenger to set their arguments
-    // todo: disallow anyone but the predictor/challenger/arbiter from accepting/voting
     // todo: make both parties contribute to the prize pool (right now, only predictor stakes)
     // todo: both parties need to agree on arbiter
     // todo: change rewardees
@@ -46,8 +45,19 @@ contract LongBet {
     }
     
     modifier checkAllAccepted() {
-         // disable voting until all have accepted the bet
+        // disable voting until all have accepted the bet
         require((accepted[predictor] && accepted[challenger] && accepted[arbiter]), "not all parties have accepted");
+        _;
+    }
+
+    modifier isParty() {
+        // disable voting until all have accepted the bet
+         require(
+         	msg.sender == predictor ||
+         	msg.sender == challenger ||
+         	msg.sender == arbiter,
+         	"error: not predictor, challenger, or arbiter. must be party to bet."
+         	);
         _;
     }
 
@@ -62,6 +72,7 @@ contract LongBet {
         string memory pArg, 
         string memory t) 
         payable {
+        	require(msg.value > 0, "must deposit stake");
         	require (keccak256(bytes(arg_prediction)) != keccak256(bytes("")), "must provide prediction!");
             require(arg_predictor != arg_challenger && arg_challenger != arg_arbiter && arg_arbiter != arg_predictor, "predictor, challenger, arbiter must be different addresses");
             require(
@@ -70,7 +81,6 @@ contract LongBet {
                 "predictor's argument and terms shouldn't be empty"
                 );
                 
-            // todo: add check that value is > 0
 
             prediction = arg_prediction;
             
@@ -90,31 +100,38 @@ contract LongBet {
     
     function acceptBet() 
     public 
-    checkActive {
+    checkActive
+    isParty {
         accepted[msg.sender] = true;
     }
     
     function vote(VoteState myVote) 
     public 
     checkActive 
+    isParty
     checkAllAccepted {
         require(myVote != VoteState.NotVoted, "can't vote for NotVote"); // disable voting until all have accepted the bet
         
         votes[msg.sender] = myVote;
         shouldComplete();
+        // todo: disallow anyone but the predictor/challenger/arbiter from accepting/voting
     }
     
+    // contract doesn't need to be active for this to work
+    // anybody should be able to call this
     function getVote(address voter) 
     public 
     view 
-    checkActive
     returns (VoteState){
         return votes[voter];
     }
     
+    // todo: should this only run if a party to the bet runs it? by right, they shouldn't even be calling this
+    // i've put in the modifier. let's see how it works
     function shouldComplete() 
     public 
-    checkActive {
+    checkActive 
+    isParty {
         // majority voted yes = predictor won
         if (
             (votes[predictor] == VoteState.VotedYes && votes[challenger] == VoteState.VotedYes) ||
@@ -134,9 +151,11 @@ contract LongBet {
             }
     }
     
+    // todo: is this a security vulnerability? aka could someone else just trigger this and end bet prematurely?
     function distributeReward(address rewardee) 
     private 
-    checkActive {
+    checkActive 
+    isParty {
         // send all money to this dude and deactivate contract
         _isActive = false;
         // todo: should i stop using transfer? see: https://consensys.net/diligence/blog/2019/09/stop-using-soliditys-transfer-now/
