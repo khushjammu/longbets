@@ -12,13 +12,13 @@ contract QuestoBets {
     LongBet[] public bets;
 
     function newBet(
-        string prediction,
+        string calldata prediction,
         address arg_challenger, 
         address arg_arbiter, 
         address pWins, 
         address cWins, 
-        string memory pArg, 
-        string memory t)
+        string calldata pArg, 
+        string calldata t)
     payable 
     public returns (address){
         require (keccak256(bytes(prediction)) != keccak256(bytes("")), "must provide prediction!");

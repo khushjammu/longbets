@@ -21,7 +21,7 @@ contract LongBet {
     address public challenger;
     address public arbiter; // person who casts the tie-breaker vote in whether a bet was resolved or not
     
-    uint256 public stakes;
+    uint256 public stakes; // todo: delete this
     address public predictorWins; // money sent here when predictor wins
     address public challengerWins; // money sent here when challenger wins
 
@@ -35,8 +35,8 @@ contract LongBet {
     
     enum VoteState { NotVoted, VotedYes, VotedNo }
     
-    mapping (address => VoteState) votes; // stores the votes by individuals
-    mapping (address => bool) accepted; // stores individuals accepting
+    mapping (address => VoteState) public votes; // stores the votes by individuals
+    mapping (address => bool) public accepted; // stores individuals accepting
 
     
     // https://ethereum.stackexchange.com/questions/82203/how-to-disable-a-contract-by-changing-some-internal-state-which-causes-all-funct
@@ -62,8 +62,7 @@ contract LongBet {
         string memory pArg, 
         string memory t) 
         payable {
-        	require (keccak256(bytes(arg_prediction)) != keccak256(bytes("")), "must provide prediction!")
-
+        	require (keccak256(bytes(arg_prediction)) != keccak256(bytes("")), "must provide prediction!");
             require(arg_predictor != arg_challenger && arg_challenger != arg_arbiter && arg_arbiter != arg_predictor, "predictor, challenger, arbiter must be different addresses");
             require(
                 keccak256(bytes(pArg)) != keccak256(bytes("")) && 
