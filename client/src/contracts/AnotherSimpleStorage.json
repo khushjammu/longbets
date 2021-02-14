@@ -25,8 +25,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.8.1+commit.df193b15\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"x\",\"type\":\"uint256\"}],\"name\":\"set\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Users/khushjammu/GitHub/longbets/contracts/AnotherSimpleStorage.sol\":\"AnotherSimpleStorage\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/khushjammu/GitHub/longbets/contracts/AnotherSimpleStorage.sol\":{\"keccak256\":\"0x208b5608f7724a8803049ce89b12b1b08466140c685f6e4c914098f02592ea38\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://4c4f03a3a6e6604ba4513900595731edd7c2e6979ed2d436520c6e38386fe61b\",\"dweb:/ipfs/QmNSHQg7rprgXkoYmR8KAHtaVAYywtF7ZBzcNpHnsoCMBJ\"]}},\"version\":1}",
@@ -1148,8 +1147,7 @@
     }
   },
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-02-13T18:25:44.119Z",
-  "networkType": "ethereum",
+  "updatedAt": "2021-02-14T03:24:32.729Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},
