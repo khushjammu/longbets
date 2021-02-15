@@ -60,9 +60,12 @@ const App = () => {
   }
   return (
     <Router>
-      <div class="font-mono">
+      <div class="font-mono bg-black">
         <nav>
-          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {
+          // should this be absolute? i can't think of another way to accomplish desired func
+          }
+          <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
               <div class="flex items-center">
                 <div class="flex-shrink-0">
@@ -95,14 +98,14 @@ const App = () => {
         </nav>
         <Switch>
           <Route exact path="/">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="">
               <div class="flex flex-wrap justify-center bg-black h-screen">
                 <MainPage />
               </div>
             </div>
           </Route>
           <Route path="/predict">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
               <div class="flex flex-wrap justify-center bg-black h-screen">
                 <ContractCreator web3={web3} contract={questoBets} />
               </div>
