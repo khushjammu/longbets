@@ -23,24 +23,59 @@ const ContractPreview = ({
 
 	return (
 		<div class="w-72 h-auto p-5 flex flex-wrap justify-center space-y-3 content-center border-2 border-pink-300">
-			<h2 class="text-white text-center text-md font-medium">
+			<h2 class="text-white text-justify text-md font-medium">
 				{prediction.length > 60
 					? prediction.substr(0, 60) + "..."
 					: prediction}
 			</h2>
 			{threeDots()}
-			<div>
-				<div class="text-md font-bold">
-					<a class="text-pink-300">ETH </a>
-					<a class="text-white">{stake}</a>
-				</div>
-				<div class="text-md font-bold">
-					<a class="text-pink-300">ETH </a>
-					<a class="text-white">{stake}</a>
-				</div>
-				<div class="text-md font-bold">
-					<a class="text-pink-300">ETH </a>
-					<a class="text-white">{stake}</a>
+			<div class="flex w-full justify-center">
+				<div class="text-right">
+					<div class="text-md font-bold">
+						<a
+							href={"https://etherscan.io/address/" + predictor}
+							class="text-pink-300"
+						>
+							PREDICTOR:{" "}
+						</a>
+						<a
+							href={"https://etherscan.io/address/" + predictor}
+							class="text-white transition duration-100 ease-in-out hover:border-b-2 hover:text-pink-300"
+						>
+							{predictor.substr(0, 8) + "..."}
+						</a>
+					</div>
+					<div class="text-md font-bold">
+						<a
+							href={"https://etherscan.io/address/" + challenger}
+							class="text-pink-300"
+						>
+							CHALLENGER:{" "}
+						</a>
+						<a
+							href={"https://etherscan.io/address/" + challenger}
+							class="text-white transition duration-100 ease-in-out hover:border-b-2 hover:text-pink-300"
+						>
+							{challenger.substr(0, 8) + "..."}
+						</a>
+					</div>
+					<div
+						class="text-md font-bold"
+						href={"https://etherscan.io/address/" + arbiter}
+					>
+						<a
+							href={"https://etherscan.io/address/" + arbiter}
+							class="text-pink-300"
+						>
+							ARBITER:{" "}
+						</a>
+						<a
+							href={"https://etherscan.io/address/" + arbiter}
+							class="text-white transition duration-100 ease-in-out hover:border-b-2 hover:text-pink-300"
+						>
+							{arbiter.substr(0, 8) + "..."}
+						</a>
+					</div>
 				</div>
 			</div>
 			{threeDots()}
