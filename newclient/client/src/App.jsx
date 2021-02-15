@@ -60,12 +60,9 @@ const App = () => {
   }
   return (
     <Router>
-      <div class="font-mono bg-black">
+      <div class="bg-black font-mono-custom">
         <nav>
-          {
-          // should this be absolute? i can't think of another way to accomplish desired func
-          }
-          <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
               <div class="flex items-center">
                 <div class="flex-shrink-0">
@@ -77,15 +74,15 @@ const App = () => {
                 </div>
                 <div class="hidden md:block">
                   <div class="ml-10 flex items-baseline space-x-4">
-                    <div class="text-gray-300 hover:text-blue-700 px-3 text-sm font-medium">
-                      <NavLink to="/predict" activeClassName="text-blue-700">
+                    <div class="text-gray-300 hover:text-pink-300 px-3 text-sm font-medium">
+                      <NavLink to="/predict" activeClassName="text-pink-300">
                         Predict
                       </NavLink>
                     </div>
-                    <div class="text-gray-300 hover:text-blue-700 px-3 text-sm font-medium">
+                    <div class="text-gray-300 hover:text-pink-300 px-3 text-sm font-medium">
                       <NavLink
                         to="/viewPrediction"
-                        activeClassName="text-blue-700"
+                        activeClassName="text-pink-300"
                       >
                         View Prediction
                       </NavLink>
@@ -98,14 +95,14 @@ const App = () => {
         </nav>
         <Switch>
           <Route exact path="/">
-            <div class="">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
               <div class="flex flex-wrap justify-center bg-black h-screen">
                 <MainPage />
               </div>
             </div>
           </Route>
           <Route path="/predict">
-            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
               <div class="flex flex-wrap justify-center bg-black h-screen">
                 <ContractCreator web3={web3} contract={questoBets} />
               </div>

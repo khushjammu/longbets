@@ -1,39 +1,26 @@
 import React from "react";
-import Modal from "react-modal";
-
-const customStyles = {
-	content: {
-		top: "50%",
-		left: "50%",
-		right: "auto",
-		bottom: "auto",
-		marginRight: "-50%",
-		transform: "translate(-50%, -50%)",
-		backgroundColor: "black",
-		borderRadius: "",
-	},
-	overlay: {
-		backgroundColor: "#11111",
-		backdropFilter: "blur(6px)",
-	},
-};
+import ContractPreview from "./contractPreview";
 
 const ContractCreator = ({ web3, contract }) => {
-	const [arbiter, setArbiter] = React.useState("");
-	const [challenger, setChallenger] = React.useState("");
+	const [arbiter, setArbiter] = React.useState(null);
+	const [challenger, setChallenger] = React.useState(null);
 	const [pred, setPred] = React.useState("");
 	const [arbiterValid, setArbiterValid] = React.useState("Short");
 	const [challengerValid, setChallengerValid] = React.useState("Short");
 	const [stake, setStake] = React.useState(0);
 	const [accounts, setAccounts] = React.useState(null);
-	const [showModal, setShowModal] = React.useState(true);
-	const [editingWho, setEditingWho] = React.useState(null);
+	const [showModal, setShowModal] = React.useState(false);
+	const [editingWho, setEditingWho] = React.useState("Arbiter");
 
 	React.useEffect(() => {
 		if (showModal) {
-			document.body.style.overflow = "hidden";
+			document.body.style.position = "fixed";
+			document.body.style.overflowY = "scroll";
+			document.body.style.width = "100%";
 		} else {
-			document.body.style.overflow = "unset";
+			document.body.style.position = "unset";
+			document.body.style.overflowY = "unset";
+			document.body.style.width = "unset";
 		}
 	}, [showModal]);
 
@@ -46,12 +33,14 @@ const ContractCreator = ({ web3, contract }) => {
 	});
 
 	const editAddressModal = (field) => {
+		setEditingWho(field);
 		setShowModal(true);
 	};
 
 	const arbiterValidUpdate = React.useCallback(
 		(e) => {
 			if (e.target.value.length < 42) {
+				setArbiterValid("Short");
 			} else {
 				if (web3.utils.isAddress(e.target.value) === false) {
 					setArbiterValid("Invalid");
@@ -66,6 +55,7 @@ const ContractCreator = ({ web3, contract }) => {
 	const challengerValidUpdate = React.useCallback(
 		(e) => {
 			if (e.target.value.length < 42) {
+				setChallengerValid("Short");
 			} else {
 				if (web3.utils.isAddress(e.target.value) === false) {
 					setChallengerValid("Invalid");
@@ -97,28 +87,94 @@ const ContractCreator = ({ web3, contract }) => {
 
 	return (
 		<div class="w-3/5 h-auto p-10 justify-center border-1 border-gray-700 rounded-lg">
-			<Modal
-				isOpen={showModal}
-				onRequestClose={() => setShowModal(false)}
-				// style={customStyles}
-				class="top-1/2 left-1/2"
-			>
-				<button onClick={() => setShowModal(false)}>close</button>
-				<div class="rounded-md w-full mt-1">
-					<div class="text-sm font-medium text-white">
-						<label>Arbiter address</label>
+			{showModal ? (
+				<div>
+					<div className="justify-center items-center flex overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+						<div className="relative my-6 w-1/5">
+							<div className="border-2 border-gray-700 rounded-lg shadow-lg relative flex flex-col outline-none focus:outline-none p-4">
+								<div class="rounded-md w-full space-y-2">
+									<div class="text-2xl font-bold text-white">
+										<label>Set {editingWho}</label>
+									</div>
+									<div class="w-full space-y-2">
+										<div class="flex justify-between text-sm font-medium mb-1">
+											<label class="text-white">
+												Address
+											</label>
+											{editingWho == "Arbiter" ? (
+												<label
+													class={
+														arbiterValid == "Valid"
+															? "text-green-400"
+															: "text-red-400"
+													}
+												>
+													{arbiterValid}
+												</label>
+											) : (
+												<label
+													class={
+														challengerValid ==
+														"Valid"
+															? "text-green-400"
+															: "text-red-400"
+													}
+												>
+													{challengerValid}
+												</label>
+											)}
+										</div>
+										<input
+											type="text"
+											id="addressInput"
+											class="transition duration-100 ease-in-out hover:focus:border-pink-300 hover:border-white focus:border-pink-300 w-full sm:text-sm text-white border-gray-700 border-1 bg-black rounded-md"
+											placeholder="0xc0000..."
+											maxLength={42}
+											onChange={
+												editingWho == "Arbiter"
+													? arbiterValidUpdate
+													: challengerValidUpdate
+											}
+										/>
+										<button
+											class="hover:border-pink-300 text-white font-semibold py-2 px-4 border border-gray-700 rounded shadow"
+											onClick={() => {
+												setShowModal(false);
+												if (editingWho == "Arbiter") {
+													let value = document.getElementById(
+														"addressInput"
+													).value;
+													if (
+														arbiterValid == "Valid"
+													) {
+														setArbiter(value);
+													}
+												} else if (
+													editingWho == "Challenger"
+												) {
+													let value = document.getElementById(
+														"addressInput"
+													).value;
+													if (
+														challengerValid ==
+														"Valid"
+													) {
+														setChallenger(value);
+													}
+												}
+											}}
+										>
+											Close
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
-					<input
-						type="text"
-						class="transition duration-100 ease-in-out hover:focus:border-blue-700 hover:border-white focus:border-blue-700 w-4/5 sm:text-sm text-white border-gray-700 border-1 bg-black rounded-md"
-						placeholder="0xc0000..."
-						maxLength={42}
-						onChange={
-							editingWho == "arbiter" ? setArbiter : setChallenger
-						}
-					/>
+					<div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
 				</div>
-			</Modal>
+			) : null}
+
 			<div class="flex-auto flex-wrap space-y-4 w-full">
 				<div>
 					<div class="flex justify-between text-sm font-medium text-white">
@@ -130,7 +186,7 @@ const ContractCreator = ({ web3, contract }) => {
 							type="text"
 							name="prediction"
 							id="prediction"
-							class="transition duration-100 ease-in-out hover:focus:border-blue-700 hover:border-white focus:border-blue-700 w-full h-20 text-white resize-none sm:text-sm border-gray-700 border-1 bg-black rounded-md"
+							class="transition duration-100 ease-in-out hover:focus:border-pink-300 hover:border-white focus:border-pink-300 w-full h-20 text-white resize-none sm:text-sm border-gray-700 border-1 bg-black rounded-md"
 							placeholder="Provide a one sentence summary of your prediction."
 							disabled={pred.length < 300 ? false : true}
 							maxLength={300}
@@ -150,7 +206,7 @@ const ContractCreator = ({ web3, contract }) => {
 							type="text"
 							name="price"
 							id="price"
-							class="transition duration-100 ease-in-out hover:focus:border-blue-700 hover:border-white focus:border-blue-700 block w-full text-white pl-7 pr-12 sm:text-sm border-gray-700 border-1 bg-black rounded-md"
+							class="transition duration-100 ease-in-out hover:focus:border-pink-300 hover:border-white focus:border-pink-300 block w-full text-white pl-7 pr-12 sm:text-sm border-gray-700 border-1 bg-black rounded-md"
 							placeholder="0.00"
 							onChange={(e) => setStake(e.target.value)}
 						/>
@@ -160,7 +216,7 @@ const ContractCreator = ({ web3, contract }) => {
 							<select
 								id="token"
 								name="token"
-								class="focus:border-blue-700 h-full py-0 pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-md"
+								class="focus:border-pink-300 h-full py-0 pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-md"
 							>
 								<option>ETH</option>
 
@@ -175,51 +231,40 @@ const ContractCreator = ({ web3, contract }) => {
 				<div class="flex justify-center">
 					<div class="w-1/2">
 						<button
-							class="bg-blue-700 hover:bg-gray-800 text-white font-semibold py-2 px-4 border border-gray-700 rounded shadow justify-center"
-							onClick={() => editAddressModal(arbiter)}
+							class="hover:border-pink-300 text-white font-semibold py-2 px-4 border border-gray-700 rounded shadow justify-between outline-none focus:outline-none"
+							onClick={() => editAddressModal("Arbiter")}
 						>
-							Set Arbiter
+							{arbiter != null
+								? arbiter.substring(0, 8) + "..."
+								: "Set Arbiter"}
 						</button>
 					</div>
 					<div class="w-1/2">
 						<button
-							class="bg-blue-700 hover:bg-gray-800 text-white font-semibold py-2 px-4 border border-gray-700 rounded shadow justify-center"
-							onClick={() => editAddressModal(arbiter)}
+							class="hover:border-pink-300 text-white font-semibold py-2 px-4 border border-gray-700 rounded shadow justify-between outline-none focus:outline-none"
+							onClick={() => editAddressModal("Challenger")}
 						>
-							Set Arbiter
+							{challenger != null
+								? challenger.substring(0, 8) + "..."
+								: "Set Challenger"}
 						</button>
-						<div class="text-sm font-medium text-white">
-							<label>Challenger address</label>
-						</div>
-						<div class="rounded-md mt-1">
-							<input
-								type="text"
-								name="challengerAddress"
-								id="challengerAddress"
-								class="transition duration-100 ease-in-out hover:focus:border-blue-700 hover:border-white focus:border-blue-700 w-4/5 sm:text-sm text-white border-gray-700 border-1 bg-black rounded-md"
-								placeholder="0xc0000..."
-								maxLength={42}
-								onChange={challengerValidUpdate}
-							/>
-							{/*<label
-								class={
-									"w-1/5 sm:text-sm border-gray-700 border-1 bg-black ml-1 py-2.5 px-4 rounded-md " +
-									(challengerValid == "Valid"
-										? "bg-green-500 text-white"
-										: "bg-red-500 text-white")
-								}
-							>
-								{challengerValid}
-							</label>*/}
-						</div>
 					</div>
 				</div>
 				<div>
+					<ContractPreview
+						predictor="0xf9E5B730123B51041093a3dea65bcFB5102E0D2d"
+						prediction="A bioterror or bioerror will lead to one million casualties in a single event within a six month period starting no later than Dec 31 02020."
+						arbiter="0xf9E5B730123B51041093a3dea65bcFB5102E0D2d"
+						challenger="0xf9E5B730123B51041093a3dea65bcFB5102E0D2d"
+						stake="0.0624"
+					/>
+				</div>
+				<div>
 					<button
-						class="bg-blue-700 hover:bg-gray-800 text-white font-semibold py-2 px-4 border border-gray-700 rounded shadow justify-center"
+						class="hover:border-pink-300 text-white font-semibold py-2 px-4 border border-gray-700 rounded shadow justify-center"
 						onClick={createNewBet}
 					>
-						Submit prediction
+						Submit Prediction
 					</button>
 				</div>
 			</div>
