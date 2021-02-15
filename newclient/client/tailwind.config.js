@@ -5,7 +5,8 @@ module.exports = {
     fontFamily: {
       'mono-custom': ["PT Mono","monospace "]
     },
-    extend: {},
+    extend: {
+    },
   },
   variants: {
     extend: {},
