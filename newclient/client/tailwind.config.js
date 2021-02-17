@@ -3,16 +3,12 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     fontFamily: {
-      'mono-custom': ["PT Mono","monospace "]
+      "mono-custom": ["PT Mono", "monospace "],
     },
-    extend: {
-    },
+    extend: {},
   },
   variants: {
     extend: {},
   },
-   plugins: [
-      require('@tailwindcss/forms'),
-    ]
-
-}
+  plugins: [require("@tailwindcss/forms")],
+};

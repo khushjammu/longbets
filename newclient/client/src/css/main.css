@@ -11386,7 +11386,7 @@ select {
 }
 
 .font-mono-custom {
-  font-family: PT Mono, monospace;
+  font-family: PT Mono, monospace ;
 }
 
 .font-thin {
@@ -39975,7 +39975,7 @@ select {
   }
 
   .sm\:font-mono-custom {
-    font-family: PT Mono, monospace;
+    font-family: PT Mono, monospace ;
   }
 
   .sm\:font-thin {
@@ -68521,7 +68521,7 @@ select {
   }
 
   .md\:font-mono-custom {
-    font-family: PT Mono, monospace;
+    font-family: PT Mono, monospace ;
   }
 
   .md\:font-thin {
@@ -97067,7 +97067,7 @@ select {
   }
 
   .lg\:font-mono-custom {
-    font-family: PT Mono, monospace;
+    font-family: PT Mono, monospace ;
   }
 
   .lg\:font-thin {
@@ -125613,7 +125613,7 @@ select {
   }
 
   .xl\:font-mono-custom {
-    font-family: PT Mono, monospace;
+    font-family: PT Mono, monospace ;
   }
 
   .xl\:font-thin {
@@ -154159,7 +154159,7 @@ select {
   }
 
   .\32xl\:font-mono-custom {
-    font-family: PT Mono, monospace;
+    font-family: PT Mono, monospace ;
   }
 
   .\32xl\:font-thin {

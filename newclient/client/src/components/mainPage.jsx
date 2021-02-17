@@ -25,7 +25,7 @@ const MainPage = ({ web3, contract }) => {
 	const TICKER_TEXT =
 		"GME to $1000... The Second Coming before 2025... China and the US declare war on each other in 2021... Trump comes back in 2024... COVID-19 kills >1m people worldwide... ";
 	return (
-		<div class="h-auto my-32 pb-32 bg-black justify-center border-1 border-gray-700 rounded-lg space-y-36">
+		<div class="overflow-visible h-auto my-32 pb-32 bg-black justify-center border-1 border-gray-700 rounded-lg space-y-36">
 			<div class="max-w-6xl mx-auto flex flex-row justify-between font-mono-custom">
 				<div class="inline-flex flex-col max-w-prose justify-center">
 					<h1 class="font-bold text-4xl text-pink-300">
